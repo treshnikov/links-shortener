@@ -12,17 +12,17 @@ router.post(
     `/register`, 
     [
         check('email', 'Incorrect email address.').isEmail(),
-        check('password', 'Password is unsafe. Minimum length should be more than 6 characters.').isLength(6)
+        check('password', 'Password is unsafe. Minimum length should be more than 6 characters.').isLength({min: 6})
     ],
 
     async (req, res) => {
     try {
+        const {email, password} = req.body
         const errors = validationResult(req)
         if (!errors.isEmpty()){
             return res.status(400).json({errors: errors.array(), message: 'Invalid data.'})
         }
 
-        const {email, password} = req.body
         const candidate = await User.findOne({email})
 
         if (candidate){

@@ -1,23 +1,37 @@
-import React, {useContext, useState } from "react"
-import {useHttp} from '../hooks/http.hooks'
+import React, { useContext, useState, useEffect } from "react"
+import { useHttp } from '../hooks/http.hooks'
+import { useMessage } from '../hooks/message.hook'
 
 export const AuthPage = () => {
-    const {loading, error, request} = useHttp()
-
+    const { loading, error, clearError, request } = useHttp()
+    const message = useMessage()
     const [form, setForm] = useState({
         email: '', password: ''
     })
 
+    useEffect(() => {
+        message(error)
+        clearError()
+    }, [error, message])
+
     const changeHandler = event => {
-        setForm({...form, [event.target.name]: event.target.value })
+        //console.log("changeHandler", event.target.name, event.target.value)
+        setForm({ ...form, [event.target.name]: event.target.value })
     }
 
     const registerHandler = async () => {
         try {
-            const data = await request('/api/auth/register', 'POST', {...form})
-            console.log('data', data)
+            const data = await request('/api/auth/register', 'POST', { ...form })
         } catch (e) {
-            
+            console.log(e.message)
+        }
+    }
+
+    const loginHandler = async () => {
+        try {
+            const data = await request('/api/auth/login', 'POST', { ...form })
+        } catch (e) {
+            console.log(e.message)
         }
     }
 
@@ -32,39 +46,42 @@ export const AuthPage = () => {
                             <div>
                                 <div className="input-field">
                                     <input
-                                        id="inputEmail"
+                                        id="email"
                                         type="email"
                                         name="email"
+                                        value={form.email}
                                         onChange={changeHandler}
                                         className="validate" />
-                                    <label for="inputEmail">Email</label>
+                                    <label htmlFor="inputEmail">Email</label>
                                 </div>
 
                                 <div className="input-field">
                                     <input
-                                        id="inputPassword"
+                                        id="password"
                                         type="password"
                                         name="password"
+                                        value={form.password}
                                         onChange={changeHandler}
-                                        className="validate"/>
-                                    <label for="inputPassword">Password</label>
+                                        className="validate" />
+                                    <label htmlFor="inputPassword">Password</label>
                                 </div>
                             </div>
                         </div>
                         <div className="card-action">
-                            <input 
-                                type="button" 
-                                className="btn teal lighten-2" 
-                                style={{ marginRight: 10 }} 
+                            <input
+                                type="button"
+                                className="btn teal lighten-2"
+                                style={{ marginRight: 10 }}
                                 value="Login"
-                                disabled={loading}/>
-                            <input 
-                                type="button" 
-                                className="btn grey lighten-1 black-text" 
-                                value="Register" 
+                                disabled={loading}
+                                onClick={loginHandler} />
+                            <input
+                                type="button"
+                                className="btn grey lighten-1 black-text"
+                                value="Register"
                                 onClick={registerHandler}
                                 disabled={loading}
-                                />
+                            />
                         </div>
                     </div>
                 </div>
