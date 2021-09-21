@@ -42,51 +42,48 @@ export const AuthPage = () => {
     return (
         <div className="row">
             <div className="col s6 offset-s3">
-                <h3>Links shortener app</h3>
-                <div className="row">
-                    <div className="card grey lighten-5">
-                        <div className="card-content white-text">
-                            <span className="card-title" style={{ color: "black" }}>Authentication</span>
-                            <div>
-                                <div className="input-field">
-                                    <input
-                                        id="email"
-                                        type="email"
-                                        name="email"
-                                        value={form.email}
-                                        onChange={changeHandler}
-                                        className="validate" />
-                                    <label htmlFor="inputEmail">Email</label>
-                                </div>
+                <div className="card grey lighten-5">
+                    <div className="card-content white-text">
+                        <span className="card-title" style={{ color: "black" }}>Authentication</span>
+                        <div>
+                            <div className="input-field">
+                                <input
+                                    id="email"
+                                    type="email"
+                                    name="email"
+                                    value={form.email}
+                                    onChange={changeHandler}
+                                    className="validate" />
+                                <label htmlFor="inputEmail">Email</label>
+                            </div>
 
-                                <div className="input-field">
-                                    <input
-                                        id="password"
-                                        type="password"
-                                        name="password"
-                                        value={form.password}
-                                        onChange={changeHandler}
-                                        className="validate" />
-                                    <label htmlFor="inputPassword">Password</label>
-                                </div>
+                            <div className="input-field">
+                                <input
+                                    id="password"
+                                    type="password"
+                                    name="password"
+                                    value={form.password}
+                                    onChange={changeHandler}
+                                    className="validate" />
+                                <label htmlFor="inputPassword">Password</label>
                             </div>
                         </div>
-                        <div className="card-action">
-                            <input
-                                type="button"
-                                className="btn teal lighten-2"
-                                style={{ marginRight: 10 }}
-                                value="Login"
-                                disabled={loading}
-                                onClick={loginHandler} />
-                            <input
-                                type="button"
-                                className="btn grey lighten-1 black-text"
-                                value="Register"
-                                onClick={registerHandler}
-                                disabled={loading}
-                            />
-                        </div>
+                    </div>
+                    <div className="card-action">
+                        <input
+                            type="button"
+                            className="btn teal lighten-2"
+                            style={{ marginRight: 10 }}
+                            value="Login"
+                            disabled={loading}
+                            onClick={loginHandler} />
+                        <input
+                            type="button"
+                            className="btn grey lighten-1 black-text"
+                            value="Register"
+                            onClick={registerHandler}
+                            disabled={loading}
+                        />
                     </div>
                 </div>
             </div>
