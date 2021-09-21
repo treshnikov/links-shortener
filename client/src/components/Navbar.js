@@ -4,18 +4,18 @@ import { AuthContext } from "../context/AuthContext"
 
 export const Navbar = () => {
     const auth = useContext(AuthContext)
-    const hstory = useHistory()
+    const history = useHistory()
 
     const logoutHandler = event => {
         event.preventDefault()
         auth.logout()
-        //history.push('/')
+        history.push('/')
     }
 
     return (
         <nav>
-            <div className="nav-wrapper grey lighten-5">
-                <a href="#" class="brand-logo">Links shortener app</a>
+            <div className="nav-wrapper teal">
+                <span href="#" className="brand-logo">Links shortener app</span>
                 <ul id="nav-mobile" className="right hide-on-med-and-down">
                     <li><NavLink to="/create">Create</NavLink></li>
                     <li><NavLink to="/links">Links</NavLink></li>

@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from "react"
 import { AuthContext } from "../context/AuthContext"
-import { useHttp } from '../hooks/http.hooks'
+import { useHttp } from '../hooks/http.hook'
 import { useMessage } from '../hooks/message.hook'
 
 export const AuthPage = () => {
@@ -11,19 +11,22 @@ export const AuthPage = () => {
         email: '', password: ''
     })
 
+    useEffect( () =>{
+        window.M.updateTextFields()
+    }, [])
+
     useEffect(() => {
         message(error)
         clearError()
-    }, [error, message])
+    }, [error, message, clearError])
 
     const changeHandler = event => {
-        //console.log("changeHandler", event.target.name, event.target.value)
         setForm({ ...form, [event.target.name]: event.target.value })
     }
 
     const registerHandler = async () => {
         try {
-            const data = await request('/api/auth/register', 'POST', { ...form })
+            await request('/api/auth/register', 'POST', { ...form })
         } catch (e) {
             console.log(e.message)
         }
@@ -42,10 +45,11 @@ export const AuthPage = () => {
     return (
         <div className="row">
             <div className="col s6 offset-s3">
+                <h3>Links shortener app</h3>
                 <div className="card grey lighten-5">
                     <div className="card-content white-text">
-                        <span className="card-title" style={{ color: "black" }}>Authentication</span>
                         <div>
+                        <span className="card-title" style={{ color: "black" }}>Welcome to the app</span>
                             <div className="input-field">
                                 <input
                                     id="email"
@@ -72,14 +76,14 @@ export const AuthPage = () => {
                     <div className="card-action">
                         <input
                             type="button"
-                            className="btn teal lighten-2"
+                            className="btn"
                             style={{ marginRight: 10 }}
                             value="Login"
                             disabled={loading}
                             onClick={loginHandler} />
                         <input
                             type="button"
-                            className="btn grey lighten-1 black-text"
+                            className="btn"
                             value="Register"
                             onClick={registerHandler}
                             disabled={loading}
