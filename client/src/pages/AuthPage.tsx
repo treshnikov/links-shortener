@@ -2,14 +2,13 @@ import React, { useContext, useState, useEffect } from "react"
 import { AuthContext } from "../context/AuthContext"
 import { useHttp } from '../hooks/http.hook'
 import { useMessage } from '../hooks/message.hook'
+import { UserInfo } from "../domain/UserInfo"
 
-export const AuthPage = () => {
+export const AuthPage: React.FunctionComponent = () => {
     const auth = useContext(AuthContext)
     const { loading, error, clearError, request } = useHttp()
     const message = useMessage()
-    const [form, setForm] = useState({
-        email: '', password: ''
-    })
+    const [form, setForm] = useState<UserInfo>(new UserInfo())
 
     useEffect( () =>{
         window.M.updateTextFields()
@@ -20,7 +19,7 @@ export const AuthPage = () => {
         clearError()
     }, [error, message, clearError])
 
-    const changeHandler = event => {
+    const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
         setForm({ ...form, [event.target.name]: event.target.value })
     }
 
@@ -28,7 +27,7 @@ export const AuthPage = () => {
         try {
             await request('/api/auth/register', 'POST', { ...form })
         } catch (e) {
-            console.log(e.message)
+            console.log((e as Error).message)
         }
     }
 
@@ -38,7 +37,7 @@ export const AuthPage = () => {
             console.log(data)
             auth.login(data.token, data.userId)
         } catch (e) {
-            console.log(e.message)
+            console.log((e as Error).message)
         }
     }
 

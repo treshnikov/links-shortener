@@ -4,7 +4,7 @@ import {AuthContext} from '../context/AuthContext'
 import {Loader} from '../components/Loader'
 import {LinksList} from '../components/LinksList'
 
-export const LinksPage = () => {
+export const LinksPage: React.FunctionComponent = () => {
   const [links, setLinks] = useState([])
   const {loading, request} = useHttp()
   const {token} = useContext(AuthContext)

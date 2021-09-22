@@ -1,6 +1,11 @@
 import React from 'react'
+import { ILink } from '../domain/ILink' 
 
-export const LinkCard = ({ link }) => {
+type LinkProps = {
+  link: ILink
+}
+
+export const LinkCard: React.FunctionComponent<LinkProps> = ({ link  }) => {
   return (
     <>
       <h2>Ссылка</h2>

@@ -3,7 +3,7 @@ import { useHttp } from '../hooks/http.hook'
 import { AuthContext } from '../context/AuthContext'
 import { useHistory } from 'react-router-dom'
 
-export const CreatePage = () => {
+export const CreatePage: React.FunctionComponent = () => {
     const history = useHistory()
     const auth = useContext(AuthContext)
     const { request, loading } = useHttp()
@@ -13,7 +13,7 @@ export const CreatePage = () => {
         window.M.updateTextFields()
     }, [])
 
-    const pressHandler = async event => {
+    const pressHandler = async (event: React.KeyboardEvent) => {
         if (event.key === 'Enter') {
             await handleCreate()
         }

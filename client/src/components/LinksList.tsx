@@ -1,7 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { ILink } from '../domain/ILink'
+   
+type LinksListProps = {
+    links: Array<ILink>;
+}
 
-export const LinksList = ({ links }) => {
+export const LinksList: React.FunctionComponent<LinksListProps> = ({ links }) => {
     if (!links.length) {
         return <p className="center">No links yet</p>
     }

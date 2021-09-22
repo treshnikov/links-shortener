@@ -5,7 +5,7 @@ import {CreatePage} from './pages/CreatePage'
 import {DetailPage} from './pages/DetailPage'
 import {AuthPage} from './pages/AuthPage'
 
-export const useRoutes = isAuthenticated => {
+export const useRoutes: React.FunctionComponent<boolean> = (isAuthenticated: boolean) => {
   if (isAuthenticated) {
     return (
       <Switch> <Route path="/links" exact>
@@ -15,7 +15,7 @@ export const useRoutes = isAuthenticated => {
           <CreatePage />
         </Route>
         <Route path="/detail/:id">
-          <DetailPage />
+          <DetailPage/>
         </Route>
         <Redirect to="/create" />
       </Switch>
