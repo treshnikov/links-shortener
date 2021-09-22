@@ -1,0 +1,6 @@
+{
+    "port": 4000,
+    "mongoUrl": "mongodb://localhost:27017/prod_links_shortener_app",
+    "jwtSecret": "jshdfsdlkjfhajkshflakshdfkjlahsdfjkahsjkdfhaklshdf",
+    "baseUrl": "http://localhost:4000"
+}
